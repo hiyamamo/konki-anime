@@ -1,0 +1,56 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#header-logo{
+	max-width: 48px;
+	max-height: 48px;
+}
+
+img{
+	border:none;
+}
+
+#user-info{
+}
+
+.navbar-inverse-custom {
+	@extend .navbar-inverse !optional;
+	background: -moz-linear-gradient(top, #FFCC33, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC33), to(#FF6633));
+	.nav > li{
+		a{
+			color: #FFFFFF;
+		}
+	}
+	.nav#user-info > li {
+		a:hover, a:focus{
+			background-color: rgba(0, 0, 0, 0.35);
+		}
+	}
+}
+#twitter-profile-image{
+	max-width: 24px;
+	max-height: 24px;
+}
+
+#season-list{
+	.subseason{
+		padding-top: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+

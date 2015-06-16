@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uid: 111111
+  name: taro
+  img_url: https://example.com/pic/taro
+  screen_name: TanakaTaro
+  access_token: MyText
+  access_token_secret: MyText
+  provider: Twitter
+
+two:
+  uid: 22222
+  name: jiro
+  img_url: https://example.com/pic/jiro
+  screen_name: TanakaJiro
+  access_token: MyText
+  access_token_secret: MyText
+  provider: Twitter

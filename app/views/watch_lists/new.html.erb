@@ -1,0 +1,30 @@
+<% @programs = programs(current_season_to_api_fmt) %>
+
+<%= form_tag('/watch_lists') do %>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>タイトル</th>
+			<th>詳細</th>
+		</tr>
+	</thead>
+	<tbody>
+			<% @programs.each do |p, idx| %>
+				<tr id=<%= p["id"] %>>
+					<td>
+						<%= check_box_tag 'checked[programs][]', p.to_json %>
+					</td>
+					<td>
+						<%= p["title"] %>
+					</td>
+					<td>
+						<% @options = build_options(p["details"]) %>
+						<%= select_tag 'selection[]', options_for_select(@options) %>
+					</td>
+				</tr>
+			<% end %>
+	</tbody>
+</table>
+<%= submit_tag "決定", :class => "btn btn-default" %>
+<% end %>

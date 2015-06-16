@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  tv_station: MyString
+  program_id: MyString
+  season: MyString
+  started_at: 2015-06-09 11:12:55
+  user_id: 1
+
+two:
+  title: MyString
+  tv_station: MyString
+  program_id: MyString
+  season: MyString
+  started_at: 2015-06-09 11:12:55
+  user_id: 1

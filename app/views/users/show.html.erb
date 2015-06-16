@@ -1,0 +1,10 @@
+<h3><%= current_user.name %></h3>
+<ul>
+	<% @seasons.each do |s| %>
+		<li><%= link_to s, "/watch_lists/#{s}" %></li>
+	<% end %>
+	<% unless @seasons.index(current_season_to_api_fmt) %>
+		<li><% link_to '今期のウォッチリスト作成', "/watch_lists/new" %></li>
+	<% end %>
+</ul>
+

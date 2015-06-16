@@ -1,0 +1,20 @@
+<h2>ウォッチリスト <%= @season %></h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>title</th>
+			<th>テレビ局</th>
+			<th>開始日時</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @watch_lists.each do |w| %>
+			<tr>
+				<td><%= w.title %></td>
+				<td><%= w.tv_station %></td>
+				<td><%= w.started_at %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

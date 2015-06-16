@@ -1,0 +1,24 @@
+<div class="navbar navbar-static-top navbar-inverse-custom">
+	<div class="container">
+			<%= link_to image_tag('header_logo.png', { :id => "header-logo", :alt => 'ヘッダーロゴ' }), root_path %>
+				<% if current_user %>
+				<ul class="nav nav-pills pull-right" id="user-info">
+				<li>
+					<%= link_to "/users/#{current_user.name}" do %>
+						<%= image_tag(current_user.img_url, { :alt => 'twitter_profile_image', :id => "twitter-profile-image" }) %>
+						<span><%= current_user.name %></span>
+					<% end %>
+				</li>
+				<li>
+					<%= link_to "Logout", "/logout", :method => "POST" %>
+				</li>
+				</ul>
+				<% else %>
+					<ul class="nav pull-right">
+					<li>
+					<%= link_to image_tag('sign-in-with-twitter-gray.png', { :id => 'twitter-sign-in', :alt => 'Twitterでログイン' }), "/auth/twitter" %>
+					</li>
+				</ul>
+				<% end%>
+		</div>
+</div>

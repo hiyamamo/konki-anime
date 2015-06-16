@@ -1,0 +1,48 @@
+<% @programs = programs(@season.to_api_fmt, "vote") %>
+<div class="row" id="season-list">
+	<div class="col-md-2 col-xs-2 col-lg-2 subseason">
+		<% if @season.prev? %>
+			<%= link_to @season.prev, @season.prev_url %>
+		<% else %>
+				-----------------
+		<% end %>
+	</div>
+	<div class="col-md-8 col-xs-8 col-lg-8">
+		<h3><%= @season.now %></h3>
+	</div>
+	<div class="col-md-2 col-xs-2 col-lg-2 subseason">
+		<% if @season.next? %>
+			<%= link_to @season.next, @season.next_url %>
+		<% else %>
+				-----------------
+		<% end %>
+	</div>
+</div>
+<div class="row">
+<table class="table" >
+	<thead>
+		<tr>
+			<th>順位</th>
+			<th>タイトル</th>
+			<th>開始日時・放送局</th>
+			<th>票数</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @programs.each do |p| %>
+		<tr>
+			<td><%= p["rank"] %></td>
+			<td><a href=<%= p["url"] %> ><%= p["title"] %></a></td>
+			<td>
+				<ul>
+					<% p["details"].each do |detail| %>
+						<li><%= detail["started_at"] %> : <%= detail["tv_station"] %></li>
+					<% end %>
+				</ul>
+			</td>
+			<td><%= p["vote"] %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+</div>

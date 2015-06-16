@@ -1,0 +1,45 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+#header_logo{
+	max-width: 48px;
+	max-height: 48px;
+}
+
+img{
+	border:none;
+}
+
+#user_info{
+	margin: 20px;
+}
+
+.navbar-inverse-custom {
+	@extend .navbar-inverse !optional;
+	background: -moz-linear-gradient(top, #FFCC33, #FF6633);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC33), to(#FF6633));
+	.nav > li{
+		a{
+			color: #FFFFFF;
+		}
+	}
+	.nav#user_info > li {
+		a:hover, a:focus{
+			background-color: rgba(0, 0, 0, 0.55);
+		}
+	}
+}
+#twitter_profile_image{
+	max-width: 24px;
+	max-height: 24px;
+}
+
+#season_list{
+	.subseason{
+		padding-top: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+
