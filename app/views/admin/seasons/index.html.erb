@@ -1,6 +1,16 @@
 <% @seasons.each do |s| %>
 	<% @programs = s.programs %>
-	<h3><%= link_to s[:value], admin_season_programs_path(:season_id => s[:id]) %></h3>
+	<h3>
+		<% if s.current %>
+			<span>☆</span>
+		<% end %>
+		<%= link_to s[:value], admin_season_programs_path(:season_id => s[:id]) %>
+	</h3>
+	<% if !s.current %>
+		<%= form_tag admin_season_path(:id => s.id), :method => :patch do %>
+			<%= submit_tag "Set Current Season" %>
+		<% end %>
+	<% end %>
 	<table class="table" >
 		<thead>
 			<tr>
