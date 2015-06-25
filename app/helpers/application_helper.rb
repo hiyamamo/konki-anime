@@ -15,11 +15,4 @@ module ApplicationHelper
 		end
 	end
 
-	def current_season_to_api_fmt
-		Season.new.to_api_fmt
-	end
-
-	def current_season
-		Season.new.now
-	end
 end

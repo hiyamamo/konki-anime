@@ -31,16 +31,16 @@
 	<tbody>
 	<% @programs.each do |p| %>
 		<tr>
-			<td><%= p["rank"] %></td>
-			<td><a href=<%= p["url"] %> ><%= p["title"] %></a></td>
+			<td><%= p.rank %></td>
+			<td><a href=<%= p.url %> ><%= p.title %></a></td>
 			<td>
-				<ul>
-					<% p["details"].each do |detail| %>
-						<li><%= detail["started_at"] %> : <%= detail["tv_station"] %></li>
+				<ul style="list-style:none;">
+					<% p.details.each do |detail| %>
+						<li><%= detail.started_at.strftime("%Y年%m月%d日 %H時%M分") %>  <%= detail.tv_station %></li>
 					<% end %>
 				</ul>
 			</td>
-			<td><%= p["vote"] %></td>
+			<td><%= p.vote %></td>
 		</tr>
 	<% end %>
 	</tbody>
