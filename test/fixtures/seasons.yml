@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 2015-04
+  current: false
+
+two:
+  value: 2015-07
+  current: true
+
+three:
+  value: 2015-10
+  current: false

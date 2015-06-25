@@ -1,0 +1,43 @@
+<% @seasons.each do |s| %>
+	<% @programs = s.programs %>
+	<h3><%= link_to s[:value], admin_season_programs_path(:season_id => s[:id]) %></h3>
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>title</th>
+				<th>url</th>
+				<th>details</th>
+				<th>vote</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @programs.each do |p| %>
+				<tr>
+					<td><%= p[:id] %></td>
+					<td><%= p[:title] %></td>
+					<td><%= p[:url] %></td>
+					<td>
+						<ul>
+							<% p.details.each do |d| %>
+								<li><%= "#{d[:tv_station]}  #{d[:started_at].to_s}" %></li>
+							<% end %>
+						</ul>
+					</td>
+					<td><%= p[:vote] %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<%= form_tag '/admin/programs' do %>
+<% end %>
+<%= form_tag('/admin/programs/csv', multipart: true) do %>
+	<div class="field">
+		<%= file_field_tag :file %>
+	</div>
+	<div class="actions">
+		<%= submit_tag "Upload" %>
+	</div>
+<% end %>

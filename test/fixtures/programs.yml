@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  url: MyString
+  vote: 1
+  season_id: 
+
+two:
+  title: MyString
+  url: MyString
+  vote: 1
+  season_id: 
+
+specific_id:
+  id: 1
+  title: MyString
+  url: MyString
+  vote: 0
+  season_id: 1

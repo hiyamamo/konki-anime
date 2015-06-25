@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609021255) do
+ActiveRecord::Schema.define(version: 20150616024519) do
+
+  create_table "details", force: true do |t|
+    t.string   "tv_station"
+    t.datetime "started_at"
+    t.integer  "program_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "details", ["program_id"], name: "index_details_on_program_id"
+
+  create_table "programs", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.integer  "vote",       default: 0
+    t.integer  "season_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "programs", ["season_id"], name: "index_programs_on_season_id"
+
+  create_table "seasons", force: true do |t|
+    t.string   "value",                      null: false
+    t.boolean  "current",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.integer  "uid"
@@ -28,10 +56,7 @@ ActiveRecord::Schema.define(version: 20150609021255) do
   create_table "watch_lists", force: true do |t|
     t.integer  "user_id"
     t.integer  "program_id"
-    t.string   "title"
-    t.string   "tv_station"
-    t.datetime "started_at"
-    t.string   "season"
+    t.integer  "detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

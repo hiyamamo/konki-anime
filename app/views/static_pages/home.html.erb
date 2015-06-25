@@ -1,7 +1,7 @@
-<% @programs = programs(@season.to_api_fmt, "vote") %>
+<% @programs = programs(@season, "vote") %>
 <div class="row" id="season-list">
 	<div class="col-md-2 col-xs-2 col-lg-2 subseason">
-		<% if @season.prev? %>
+		<% if @season.prev %>
 			<%= link_to @season.prev, @season.prev_url %>
 		<% else %>
 				-----------------
@@ -11,7 +11,7 @@
 		<h3><%= @season.now %></h3>
 	</div>
 	<div class="col-md-2 col-xs-2 col-lg-2 subseason">
-		<% if @season.next? %>
+		<% if @season.next %>
 			<%= link_to @season.next, @season.next_url %>
 		<% else %>
 				-----------------

@@ -2,33 +2,7 @@ require 'open-uri'
 require 'json'
 module ApplicationHelper
 	def programs(season, sort = nil)
-		if sort.nil?
-			url = API_URL_PROGRAMS + season
-		else
-			url = API_URL_PROGRAMS + "#{season}?sort=#{sort}"
-		end
-		res = open(url);
-		code, message = res.status
-		if code == '200'
-			src = JSON.parse res.read
-			temp_vote = 0
-			offset = 0
-			rank = 0
-			result = src.map do | s |
-				if temp_vote != s["vote"]
-					rank = rank + offset + 1
-					offset = 0
-					temp_vote = s["vote"]
-				else
-					offset += 1
-				end
-				s["rank"] = rank
-				s
-			end
-			result
-		else
-			nil
-		end
+		season.programs_with_rank(sort)
 	end
 
 	# ページ毎のタイトルを返す

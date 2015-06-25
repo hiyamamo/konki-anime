@@ -1,0 +1,57 @@
+<h3><%= @season.value %></h3>
+<table class="table" >
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>title</th>
+			<th>url</th>
+			<th>details</th>
+			<th>vote</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @programs.each do |p| %>
+			<tr>
+				<td><%= p[:id] %></td>
+				<td><%= p[:title] %></td>
+				<td><%= p[:url] %></td>
+				<td>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>tv_station</th>
+								<th>started_at</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% p.details.each do |d| %>
+						<tr>
+							<td><%= d[:tv_station] %></td>
+							<td><%= d[:started_at] %></td>
+							<td>
+								<%= form_tag admin_detail_path(:id => d[:id]), :method => :delete do %>
+									<%= submit_tag "Del" %>
+								<% end %>
+							</td>
+						</tr>
+						<% end %>
+						<tbody>
+					</table>
+				</td>
+				<td><%= p[:vote] %></td>
+				<td>
+					<%= link_to "edit", edit_admin_program_path(:id => p[:id]) %>
+				</td>
+				<td>
+					<%= form_tag admin_program_path(:id => p[:id]), :method => :delete do %>
+						<%= submit_tag "Del" %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= form_tag admin_season_path(:id => @season[:id]), :method => :delete do %>
+	<%= submit_tag "全件削除" %>
+<% end %>
+<%= link_to "全シーズン一覧", admin_seasons_path %>

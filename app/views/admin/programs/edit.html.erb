@@ -1,0 +1,22 @@
+<h3><%= @program.season.value %></h3>
+<div id="edit-program">
+	<p>Program</p>
+	<%= form_for [:admin, @program], :url => { :action => :update } do |f| %>
+		<%= f.text_field :title, :size => 40 %>
+		<%= f.text_field :url, :size => 60 %>
+		<%= f.submit 'change' %>
+	<% end %>
+</div>
+
+<div id="edit-details">
+	<p>Details</p>
+	<% @details.each do |detail| %>
+		<%= form_for [:admin, detail], :url => admin_detail_path(:id => detail.id), :html => {:method => :patch }  do |f| %>
+			<%= f.text_field :tv_station, :size => 40 %>
+			<%= f.text_field :started_at, :size => 60 %>
+			<%= f.submit 'change' %>
+		<% end %>
+	<% end %>
+</div>
+
+<%= link_to "戻る", admin_season_programs_path(:season_id => @program.season.id) %>

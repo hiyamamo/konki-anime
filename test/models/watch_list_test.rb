@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class WatchListTest < ActiveSupport::TestCase
+=begin
 	def setup
 		@user = User.create
 		@datetime = DateTime.new(2015, 7, 1, 2, 0, 0)
@@ -10,7 +11,6 @@ class WatchListTest < ActiveSupport::TestCase
 		watch_list = WatchList.new
 		assert_not watch_list.save, 'Saved the watch_list without a user_id'
 	end
-
 	test 'create from valid posted_data' do
 		details = [
 			{
@@ -109,4 +109,5 @@ class WatchListTest < ActiveSupport::TestCase
 		assert_equal @user.watch_lists.count, 0
 	end
 
+=end
 end
