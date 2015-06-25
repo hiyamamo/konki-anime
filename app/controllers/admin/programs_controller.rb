@@ -25,6 +25,7 @@ class Admin::ProgramsController < ApplicationController
 		program = Program.find(params[:id])
 		program.title = params[:program][:title]
 		program.url = params[:program][:url]
+		program.vote = params[:program][:vote]
 		program.save
 		redirect_to :back
 	end

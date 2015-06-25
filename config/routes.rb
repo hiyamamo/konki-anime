@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 	post "logout" => "sessions#destroy"
 
 	namespace :admin do
+		root "seasons#index"
 		post 'programs/csv' => 'programs#create_with_csv'
 		resources :seasons, :only => [:index, :destroy] do
 			resources :programs, :only => [:index, :edit, :destroy, :create, :update], shallow: true

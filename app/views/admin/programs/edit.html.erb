@@ -4,6 +4,7 @@
 	<%= form_for [:admin, @program], :url => { :action => :update } do |f| %>
 		<%= f.text_field :title, :size => 40 %>
 		<%= f.text_field :url, :size => 60 %>
+		<%= f.text_field :vote %>
 		<%= f.submit 'change' %>
 	<% end %>
 </div>
