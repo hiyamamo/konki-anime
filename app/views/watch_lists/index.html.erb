@@ -1,0 +1,12 @@
+<h3>ウォッチリスト <%= @season.now %></h3> 
+
+<table class="table">
+	<tbody>
+	<% @watch_lists.each do |w| %>
+		<tr>
+			<td><%= link_to w.program.title, w.program.url %></td>
+			<td><%= w.detail.tv_station %></td>
+			<td><%= w.detail.started_at.strftime("%Y/%m/%d %H:%M") %></td>
+		<% end %>
+	</tbody>
+</table>

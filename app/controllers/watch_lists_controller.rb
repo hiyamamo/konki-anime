@@ -2,6 +2,13 @@ require 'json'
 class WatchListsController < ApplicationController
 	include SessionsHelper
 	before_action :signed_in_user
+
+	def index
+		user = User.find_by_name(params[:user_name])
+		@season = Season.find_by_value(params[:season])
+		details = Detail.where(:program => Program.where(:season => @season))
+		@watch_lists = user.watch_lists.where(:detail => details)
+	end
 	def new
 		@season = Season.where(:current => true).first
 	end
@@ -39,14 +46,6 @@ class WatchListsController < ApplicationController
 	end
 
 	private
-	def post_program_ids(new_ids, old_ids)
-		inc_ids = new_ids - old_ids
-		dec_ids = old_ids - new_ids
-
-		program_ids = { :inc => inc_ids, :dec => dec_ids }
-
-	end
-
 	def signed_in_user
 		redirect_to root_path, notice: "Please sign in." unless singed_in?
 	end

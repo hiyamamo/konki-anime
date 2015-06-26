@@ -6,5 +6,6 @@ class UsersController < ApplicationController
 			@seasons.push w.detail.program.season
 		end
 		@seasons.uniq! { |season| season.value }
+		@seasons.sort! { |a, b| a.value <=> b.value }
   end
 end
