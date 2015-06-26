@@ -3,18 +3,21 @@
 one:
   title: MyString
   url: MyString
-  vote: 1
   season_id: 
 
 two:
   title: MyString
   url: MyString
-  vote: 1
   season_id: 
 
 specific_id:
   id: 1
   title: MyString
   url: MyString
-  vote: 0
+  season_id: 1
+
+current_season:
+  id: 10
+  title: Title
+  url: Url
   season_id: 1

@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20150616024519) do
   create_table "programs", force: true do |t|
     t.string   "title"
     t.string   "url"
-    t.integer  "vote",       default: 0
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -55,7 +54,6 @@ ActiveRecord::Schema.define(version: 20150616024519) do
 
   create_table "watch_lists", force: true do |t|
     t.integer  "user_id"
-    t.integer  "program_id"
     t.integer  "detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"

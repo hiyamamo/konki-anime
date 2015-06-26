@@ -3,21 +3,21 @@ class Season < ActiveRecord::Base
 	validates_with SeasonValidator
 
 	has_many :programs, :dependent => :destroy
+	has_many :details, :through => :programs
 
 	def programs_with_rank(sort = nil)
-		if sort.nil?
-			programs = self.programs
-		else
-			programs = self.programs.order("vote DESC")
+		programs = self.programs
+		if sort == "vote"
+			programs = programs.sort { |a, b| b.vote <=> a.vote }
 		end
 		temp_vote = 0
 		offset = 0
 		rank = 0
 		result = programs.map do |p|
-			if temp_vote != p["vote"]
+			if temp_vote != p.vote
 				rank = rank + offset + 1
 				offset = 0
-				temp_vote = p["vote"]
+				temp_vote = p.vote
 			else
 				offset += 1
 			end
@@ -67,7 +67,7 @@ class Season < ActiveRecord::Base
 
 	class << self
 		def current
-			current = where("current = ?", true).first
+			current = find_by_current(true)
 			if current.nil?
 				nil
 			else

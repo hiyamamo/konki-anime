@@ -1,6 +1,6 @@
 class WatchList < ActiveRecord::Base
 	belongs_to :user
-	belongs_to :program
+	belongs_to :detail
 	validates :user_id, presence: true
 
 	def self.create_from_posted_data(user, details, programs, season)

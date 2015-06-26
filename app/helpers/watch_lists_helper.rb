@@ -4,8 +4,7 @@ require 'date'
 
 module WatchListsHelper
 	def parse_time(start_time)
-		date = DateTime.parse start_time
-		date.strftime("%m月%d日 %H:%M")
+		start_time.strftime("%m月%d日 %H:%M")
 	end
 
 	def build_options(details)
@@ -13,7 +12,7 @@ module WatchListsHelper
 		details.each do |detail|
 			time = parse_time detail["started_at"]
 			disp = "#{detail['tv_station']} : #{time}"
-			results[disp] = detail.to_json
+			results[disp] = detail.id
 		end
 		results
 	end

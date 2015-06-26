@@ -4,7 +4,8 @@ one:
   value: 2015-04
   current: false
 
-two:
+current:
+  id: 1
   value: 2015-07
   current: true
 

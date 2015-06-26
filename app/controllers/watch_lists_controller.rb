@@ -3,6 +3,7 @@ class WatchListsController < ApplicationController
 	include SessionsHelper
 	before_action :signed_in_user
 	def new
+		@season = Season.where(:current => true).first
 	end
 
 	def show
@@ -14,22 +15,27 @@ class WatchListsController < ApplicationController
 	end
 
 	def create
-		user = User.find(session[:user_id])
-		season = current_season_to_api_fmt
-		old_ids = user.watch_lists_program_ids season
-		user.watch_lists.destroy_all
+		user = User.find_by_name(params[:user_name])
+		detail_ids = params[:selection]
 
-		details = params["selection"].map do |p|
-			JSON.parse p
+		# 新規のみ追加
+		detail_ids.each do |detail_id|
+			if user.watch_lists.where(:detail_id => detail_id).empty?
+				user.watch_lists.create(:detail_id => detail_id)
+			end
 		end
-		programs = params[:checked][:programs].map do |p|
-			JSON.parse p
+		# 既存のIDから無くなったものを削除
+		detail_ids = detail_ids.map do |d|
+			d.to_i
 		end
-		WatchList.create_from_json_data user, details, programs
-		new_ids = user.watch_lists_program_ids
-
-		post_program_ids(new_ids, old_ids)
-		redirect_to "/watch_lists/#{current_season_to_api_fmt}"
+		user.watch_lists.each do |watch_list|
+			if watch_list.detail.season == Season.find_by_current(true)
+				unless detail_ids.include? watch_list.detail_id
+					watch_list.destroy
+				end
+			end
+		end
+		redirect_to user_path(:name => user.name)
 	end
 
 	private

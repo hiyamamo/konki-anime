@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   def show
-		watch_lists = User.find(session[:user_id]).watch_lists.select(:season).uniq
-		@seasons = watch_lists.map do |w|
-			w.season
+		@user = User.find_by_name(params[:user_name])
+		@seasons = []
+		@user.watch_lists.each do |w|
+			@seasons.push w.detail.program.season
 		end
+		@seasons.uniq! { |season| season.value }
   end
 end

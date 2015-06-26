@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :watch_lists, dependent: :destroy
+	has_many :details, :through => :watch_lists
 
 	def self.create_with_auth(auth)
 		create!do |user|

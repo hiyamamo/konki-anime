@@ -2,13 +2,24 @@ require 'test_helper'
 
 class SeasonTest < ActiveSupport::TestCase
 	def setup
-		@season = seasons(:two)
+		@season = seasons(:current)
 	end
 
 	test "program_with_rank" do
-		@season.programs.create(:vote => 2, :title => "a")
-		@season.programs.create(:vote => 2, :title => "b")
-		@season.programs.create(:vote => 1, :title => "c")
+		a = @season.programs.create(:title => "a")
+		b = @season.programs.create(:title => "b")
+		c = @season.programs.create(:title => "c")
+		d = a.details.create
+		d.watch_lists.create(:user_id => 1)
+		d = a.details.create
+		d.watch_lists.create(:user_id => 1)
+		d = b.details.create
+		d.watch_lists.create(:user_id => 1)
+		d = b.details.create
+		d.watch_lists.create(:user_id => 1)
+		d = c.details.create
+		d.watch_lists.create(:user_id => 1)
+
 		programs = @season.programs_with_rank("vote")
 		p = programs[programs.index{|v| v.title == "a"}]
 		assert_equal 1, p.rank

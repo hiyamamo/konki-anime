@@ -9,7 +9,6 @@ class Program < ActiveRecord::Base
     program = find(val['id'])
     program.title = val['title']
     program.url = val['url']
-		program.vote = val['vote']
     program.save
     val['details'].each do |d|
       detail = Detail.find(d['id'])
@@ -51,5 +50,13 @@ class Program < ActiveRecord::Base
 
     program.save
   end
+
+	def vote
+		vote = 0
+		self.details.each do |detail|
+			vote += detail.watch_lists.count
+		end
+		vote
+	end
 
 end

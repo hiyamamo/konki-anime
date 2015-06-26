@@ -7,4 +7,14 @@ class ProgramTest < ActiveSupport::TestCase
 		data = JSON.parse(json)
 		assert_equal data["title"], program.title
 	end
+
+	test "vote" do
+		p = Program.create
+		d = p.details.create
+		d.watch_lists.create(:user_id => 1)
+		d.watch_lists.create(:user_id => 1)
+		d.watch_lists.create(:user_id => 1)
+		d.watch_lists.create(:user_id => 1)
+		assert_equal 4, p.vote
+	end
 end

@@ -1,26 +1,23 @@
-<% @programs = programs(current_season_to_api_fmt) %>
+<% @programs = programs(@season) %>
 
-<%= form_tag('/watch_lists') do %>
+<%= form_tag user_watch_lists_path do %>
 <table class="table">
 	<thead>
 		<tr>
-			<th></th>
 			<th>タイトル</th>
 			<th>詳細</th>
 		</tr>
 	</thead>
 	<tbody>
 			<% @programs.each do |p, idx| %>
-				<tr id=<%= p["id"] %>>
+				<tr>
 					<td>
-						<%= check_box_tag 'checked[programs][]', p.to_json %>
+						<input type="checkbox" class="wl-checkbox" id=<%= "p#{p.id}" %>>
+						<label for=<%= "p#{p.id}" %>><%= p.title %></label>
 					</td>
-					<td>
-						<%= p["title"] %>
-					</td>
-					<td>
-						<% @options = build_options(p["details"]) %>
-						<%= select_tag 'selection[]', options_for_select(@options) %>
+					<td class="wl-select">
+						<% @options = build_options(p.details) %>
+						<%= select_tag 'selection[]', options_for_select(@options), :style => "background: gray;", :disabled => true %>
 					</td>
 				</tr>
 			<% end %>
