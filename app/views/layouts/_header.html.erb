@@ -1,16 +1,16 @@
 <div class="navbar navbar-static-top navbar-inverse-custom">
 	<div class="container">
 			<%= link_to image_tag('header_logo.png', { :id => "header-logo", :alt => 'ヘッダーロゴ' }), root_path %>
-				<% if current_user %>
+				<% if singed_in? %>
 				<ul class="nav nav-pills pull-right" id="user-info">
 				<li>
-					<%= link_to "/users/#{current_user.name}" do %>
+					<%= link_to current_user do %>
 						<%= image_tag(current_user.img_url, { :alt => 'twitter_profile_image', :id => "twitter-profile-image" }) %>
 						<span><%= current_user.name %></span>
 					<% end %>
 				</li>
 				<li>
-					<%= link_to "Logout", "/logout", :method => "POST" %>
+					<%= link_to "Logout", logout_path, :method => "POST" %>
 				</li>
 				</ul>
 				<% else %>

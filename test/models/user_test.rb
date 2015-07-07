@@ -20,6 +20,7 @@ class UserTest < ActiveSupport::TestCase
 		assert @user.respond_to?(:access_token), "access_token"
 		assert @user.respond_to?(:access_token_secret), "access_token_secret"
 		assert @user.respond_to?(:provider), "provider"
+		assert @user.respond_to?(:remember_token), "remember_token"
 	end
 
 	test "when name is not present" do
@@ -35,6 +36,13 @@ class UserTest < ActiveSupport::TestCase
 	test "when access_token_secret is not present" do
 		@user.access_token_secret = ""
 		assert_not @user.valid?
+	end
+
+	test "remember token" do
+		user = User.new(name: "name", access_token: "access_token",
+						 access_token_secret: "access_token_secret")
+		user.save
+		assert_not_nil user.remember_token
 	end
 
 end

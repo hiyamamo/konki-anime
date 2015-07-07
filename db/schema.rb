@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707072153) do
+ActiveRecord::Schema.define(version: 20150707074844) do
 
   create_table "details", force: true do |t|
     t.string   "tv_station"
@@ -60,7 +60,10 @@ ActiveRecord::Schema.define(version: 20150707072153) do
     t.string   "provider"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remember_token"
   end
+
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "watch_lists", force: true do |t|
     t.integer  "user_id"
