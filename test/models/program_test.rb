@@ -8,7 +8,7 @@ class ProgramTest < ActiveSupport::TestCase
 		assert_equal data["title"], program.title
 	end
 
-	test "vote" do
+	test "when Program's Details have WatchList, vote method should return number of its WatchLists" do
 		p = Program.create
 		d = p.details.create
 		d.watch_lists.create(:user_id => 1)

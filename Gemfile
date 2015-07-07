@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'activerecord-session_store', '~> 0.1.1'
+
 
 group :development, :test do
 	gem 'sqlite3'
@@ -37,4 +39,5 @@ end
 
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
+	gem 'minitest-doc_reporter', '0.6.0'
 end

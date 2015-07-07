@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 	has_many :watch_lists, dependent: :destroy
 	has_many :details, :through => :watch_lists
+	validates :name, :presence => true
+	validates :access_token, :presence => true
+	validates :access_token_secret, :presence => true
 
 	def self.create_with_auth(auth)
 		create!do |user|
