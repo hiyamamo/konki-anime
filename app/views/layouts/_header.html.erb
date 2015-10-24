@@ -4,7 +4,7 @@
 				<% if singed_in? %>
 				<ul class="nav nav-pills pull-right" id="user-info">
 				<li>
-					<%= link_to current_user do %>
+				<%= link_to user_path(:name => current_user.name) do %>
 						<%= image_tag(current_user.img_url, { :alt => 'twitter_profile_image', :id => "twitter-profile-image" }) %>
 						<span><%= current_user.name %></span>
 					<% end %>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :signed_in_user
   def show
 		@user = User.find_by_name(params[:user_name])
 		@seasons = []
@@ -8,4 +9,8 @@ class UsersController < ApplicationController
 		@seasons.uniq! { |season| season.value }
 		@seasons.sort! { |a, b| a.value <=> b.value }
   end
+	private
+		def signed_in_user
+			redirect_to root_path, notice: "Please sign in." unless singed_in?
+		end
 end

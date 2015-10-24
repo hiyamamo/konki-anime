@@ -6,12 +6,9 @@ Rails.application.routes.draw do
 	post "logout" => "sessions#destroy"
 
   get 'users/:user_name' => 'users#show'
-	get 'watch_lists/new' => 'watch_lists#new'
-	post 'watch_lists' => 'watch_lists#create'
-	get 'watch_lists/:season' => 'watch_lists#show'
 
 	resources :users, :param => :name, :only => [:show] do
-		resources :watch_lists, shallow: true
+		resources :watch_lists, shallow: true, :except => [:show]
 	end
 
 

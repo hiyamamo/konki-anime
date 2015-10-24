@@ -1,7 +1,6 @@
 require 'json'
 class WatchListsController < ApplicationController
 	include SessionsHelper
-	before_action :signed_in_user
 
 	def index
 		user = User.find_by_name(params[:user_name])
@@ -9,16 +8,9 @@ class WatchListsController < ApplicationController
 		details = Detail.where(:program => Program.where(:season => @season))
 		@watch_lists = user.watch_lists.where(:detail => details)
 	end
+
 	def new
 		@season = Season.where(:current => true).first
-	end
-
-	def show
-		season = params[:season] || current_season_to_api_fmt
-		@watch_lists = User.find(session[:user_id]).watch_lists.where(season: season)
-		redirect_to "users/#{session[:user_id]}" if @watch_lists.empty?
-		s = season.split('-')
-		@season = "#{s[0]}年#{s[1]}月期"
 	end
 
 	def create
@@ -45,8 +37,4 @@ class WatchListsController < ApplicationController
 		redirect_to user_path(:name => user.name)
 	end
 
-	private
-	def signed_in_user
-		redirect_to root_path, notice: "Please sign in." unless singed_in?
-	end
 end

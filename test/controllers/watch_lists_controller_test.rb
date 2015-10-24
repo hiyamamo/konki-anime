@@ -3,6 +3,7 @@ require 'test_helper'
 class WatchListsControllerTest < ActionController::TestCase
 	def setup
 		@user = users(:one)
+		sign_in @user
 	end
 
 	test 'create with all new id' do
@@ -17,13 +18,11 @@ class WatchListsControllerTest < ActionController::TestCase
 		selection = details.map do |d|
 			d.id
 		end
-		post :create, { :user_name => @user.name, :selection => selection } ,
-			{ :user_id => @user.id }
+		post :create, { :user_name => @user.name, :selection => selection }
 		assert_equal 3, @user.watch_lists.count, "all new id"
 
 		selection = selection.drop(1)
-		post :create, { :user_name => @user.name, :selection => selection } ,
-			{ :user_id => @user.id }
+		post :create, { :user_name => @user.name, :selection => selection }
 		assert_equal 2, @user.watch_lists.count, "deleted exist id"
 
 	end
