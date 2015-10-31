@@ -1,20 +1,21 @@
 <div class="col-md-8">
 <h3><%= @user.name %></h3>
 <h4>今期見るアニメリスト</h4>
-<table class="table">
-	<thead>
-		<th>タイトル</th>
-		<th>日時</th>
-	</thead>
-	<tbody>
-		<% @watch_lists.each do |w| %>
-			<tr>
-			<td><%= w.program.title %></td>
-			<td><%= w.detail.started_at.strftime("%Y/%m/%d %H:%M") %></td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+<% %i[sun mon tue wen thu fri sat].each do |sym| %>
+	<h3><%= get_jp_wday(sym) %></h3>
+	<table class="table">
+		<tbody>
+			<% watch_lists = @watch_lists[sym] %>
+			<% watch_lists.each do |w| %>
+				<tr>
+				<td><%= w.program.title %></td>
+				<td><%= w.detail.started_at.strftime("%Y/%m/%d %H:%M") %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
 </div>
 <div class="col-md-4">
 <ul class="nav pills nav-stacked">
