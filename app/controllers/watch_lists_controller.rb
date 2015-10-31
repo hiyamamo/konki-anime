@@ -3,10 +3,10 @@ class WatchListsController < ApplicationController
 	include SessionsHelper
 
 	def index
-		user = User.find_by_name(params[:user_name])
+		@user = User.find_by_name(params[:user_name])
 		@season = Season.find_by_value(params[:season])
 		details = Detail.where(:program => Program.where(:season => @season))
-		@watch_lists = user.watch_lists.where(:detail => details)
+		@watch_lists = @user.watch_lists.where(:detail => details)
 	end
 
 	def new

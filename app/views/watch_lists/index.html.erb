@@ -10,3 +10,6 @@
 		<% end %>
 	</tbody>
 </table>
+<% if @season.current %>
+	<%= link_to "編集", new_user_watch_list_path(:user_name => @user.name) %>
+<% end %>
