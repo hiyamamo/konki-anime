@@ -5,7 +5,7 @@ class Detail < ActiveRecord::Base
 	has_many :users, :through => :watch_lists
 
 	def wday
-		wdays = [ "日", "月", "火", "水", "木", "金", "土", ]
+		wdays = [:sun, :mon, :tue, :wen, :thu, :fri, :sat]
 		wdays[started_at.wday]
 	end
 end
