@@ -17,3 +17,12 @@ three:
   started_at: 2015-06-16 11:45:19
   program_id: 10
 
+saturday:
+  tv_station: MyString
+  started_at: 2015-10-31 11:45:19
+  program_id: 10
+
+sunday:
+  tv_station: MyString
+  started_at: 2015-11-01 11:45:19
+  program_id: 10
