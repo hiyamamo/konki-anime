@@ -45,4 +45,26 @@ class UserTest < ActiveSupport::TestCase
 		assert_not_nil user.remember_token
 	end
 
+
+	test "watch_lists_at_wday" do
+		sun_detail = details(:sunday)
+		sat_detail = details(:saturday)
+		5.times do
+			watch_list = WatchList.create
+			watch_list.user = @user
+			watch_list.detail = sun_detail
+			watch_list.save
+		end
+
+		10.times do
+			watch_list = WatchList.create
+			watch_list.user = @user
+			watch_list.detail = sat_detail
+			watch_list.save
+		end
+
+		assert_equal 5, @user.watch_lists_at_wday("日").count
+		assert_equal 10, @user.watch_lists_at_wday("土").count
+
+	end
 end

@@ -31,6 +31,21 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def watch_lists_at_wday(wday)
+		watch_lists = self.watch_lists
+		watch_lists.select do |w|
+			w.detail.wday == wday
+		end
+	end
+
+	def watch_lists(season=nil)
+		if season.nil?
+			return super
+		end
+		details = Detail.where(:program => Program.where(:season => season))
+		@watch_lists = super.where(:detail => details)
+	end
+
 	def User.new_rememnber_token
 		SecureRandom.urlsafe_base64
 	end
@@ -43,5 +58,6 @@ class User < ActiveRecord::Base
 		def create_remember_token
 			self.remember_token = User.encrypt(User.new_rememnber_token)
 		end
+
 
 end
