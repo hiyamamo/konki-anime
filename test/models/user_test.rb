@@ -49,6 +49,11 @@ class UserTest < ActiveSupport::TestCase
 	test "watch_lists_at_wday" do
 		sun_detail = details(:sunday)
 		sat_detail = details(:saturday)
+		program = Program.create
+
+		program.season = Season.current
+		sun_detail.program = program
+
 		5.times do
 			watch_list = WatchList.create
 			watch_list.user = @user
@@ -62,8 +67,10 @@ class UserTest < ActiveSupport::TestCase
 			watch_list.detail = sat_detail
 			watch_list.save
 		end
+		program = Program.create
+		program.season = Season.current
 
-		assert_equal 5, @user.watch_lists_at_wday("日").count
+		assert_equal 5, @user.watch_lists_at_wday("日", Season.current).count
 		assert_equal 10, @user.watch_lists_at_wday("土").count
 
 	end

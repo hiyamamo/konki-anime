@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def watch_lists_at_wday(wday)
-		watch_lists = self.watch_lists
+	def watch_lists_at_wday(wday, season=Season.current)
+		watch_lists = self.watch_lists season
 		watch_lists.select do |w|
 			w.detail.wday == wday
 		end
