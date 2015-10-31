@@ -41,8 +41,9 @@ class SeasonTest < ActiveSupport::TestCase
 		assert_equal "2015年10月期", @season.next
 	end
 
-	test "current should return value of current season" do
-		assert_equal "2015-07", Season.current
+	test "current should return current season object" do
+		s = Season.find_by_current(true)
+		assert_equal s, Season.current
 	end
 
 	test "should not save a Season when two Seasons of which current column is ture" do

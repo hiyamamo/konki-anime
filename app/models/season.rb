@@ -67,12 +67,7 @@ class Season < ActiveRecord::Base
 
 	class << self
 		def current
-			current = find_by_current(true)
-			if current.nil?
-				nil
-			else
-				current.value
-			end
+			find_by_current(true)
 		end
 	end
 
