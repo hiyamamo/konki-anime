@@ -19,25 +19,21 @@ class Program < ActiveRecord::Base
     program
   end
 
-  # csv一行分をインサートする
-  def self.insert_from_csv(csv)
-		season_str = ""
-		CSV.foreach(csv) do |row|
-			if row[0] == "season"
-				season_str = row[1]
-			else
-				title = row[0]
-				program = where("title = ?", title).first
-				if program.nil?
-					program = create(title: title, url: row[1])
-					season = Season.where("value = ?", season_str).first || Season.create(:value => season_str)
-					program.season = season
-				end
-				program.details.create(tv_station: row[2], started_at: row[3])
-				program.save!
-			end
-		end
+  def self.insert_from_json(json)
+    val = JSON.parse json
+    season_value = val["season"]
+    season = Season.where("value = ?", season_value).first || Season.create(:value => season_str)
+    programs = val["programs"]
+    programs.each do |program|
+      p = self.create(title: program["title"], url: program["url"])
+      details = program["details"]
+      details.each do |detail|
+        p.details.create(tv_station: detail["tv_station"], started_at: detail["started_at"])
+      end
+      p.save!
+    end
   end
+
 
   def self.new_from_json(json, season)
 		val = JSON.parse json

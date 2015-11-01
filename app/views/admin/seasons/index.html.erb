@@ -43,7 +43,7 @@
 
 <%= form_tag '/admin/programs' do %>
 <% end %>
-<%= form_tag('/admin/programs/csv', multipart: true) do %>
+<%= form_tag('/admin/programs/json', multipart: true) do %>
 	<div class="field">
 		<%= file_field_tag :file %>
 	</div>
