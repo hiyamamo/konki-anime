@@ -22,13 +22,14 @@ class Program < ActiveRecord::Base
   def self.insert_from_json(json)
     val = JSON.parse json
     season_value = val["season"]
-    season = Season.where("value = ?", season_value).first || Season.create(:value => season_str)
+    season = Season.where("value = ?", season_value).first || Season.create(:value => season_value)
     programs = val["programs"]
     programs.each do |program|
-      p = self.create(title: program["title"], url: program["url"])
+      p = season.programs.create(title: program["title"], url: program["url"])
       details = program["details"]
       details.each do |detail|
-        p.details.create(tv_station: detail["tv_station"], started_at: detail["started_at"])
+        started_at = Chronic.parse detail["started_at"]
+        p.details.create(tv_station: detail["station"], started_at: started_at)
       end
       p.save!
     end

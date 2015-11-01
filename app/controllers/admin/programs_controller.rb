@@ -17,7 +17,7 @@ class Admin::ProgramsController < ApplicationController
 
 	def create_with_json
 		json = params[:file]
-		Program.insert_from_json json
+		Program.insert_from_json json.read
 		redirect_to :back
 	end
 

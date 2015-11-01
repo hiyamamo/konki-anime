@@ -27,10 +27,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'activerecord-session_store', '~> 0.1.1'
 
+gem 'chronic', '~> 0.10.2'
 
 group :development, :test do
 	gem 'sqlite3'
-	gem 'debugger'
 end
 
 group :development do

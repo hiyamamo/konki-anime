@@ -36,7 +36,10 @@
 			<td>
 				<ul style="list-style:none;">
 					<% p.details.each do |detail| %>
-						<li><%= detail.started_at.strftime("%Y年%m月%d日 %H時%M分") %>  <%= detail.tv_station %></li>
+            <li>
+              <%= detail.tv_station %>
+              <%= detail.started_at.strftime("%Y年%m月%d日 %H時%M分") unless detail.started_at.nil? %>
+            </li>
 					<% end %>
 				</ul>
 			</td>
