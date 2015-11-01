@@ -15,9 +15,9 @@ class Admin::ProgramsController < ApplicationController
 		@details = @program.details
 	end
 
-	def create_with_csv
-		csv = params[:file]
-		Program.insert_from_csv csv.path
+	def create_with_json
+		json = params[:file]
+		Program.insert_from_json json
 		redirect_to :back
 	end
 

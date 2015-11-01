@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 	namespace :admin do
 		root "seasons#index"
-		post 'programs/csv' => 'programs#create_with_csv'
+		post 'programs/json' => 'programs#create_with_json'
 		resources :seasons, :only => [:index, :update, :destroy] do
 			resources :programs, :only => [:index, :edit, :destroy, :create, :update], shallow: true
 		end
