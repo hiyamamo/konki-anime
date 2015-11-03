@@ -15,4 +15,12 @@ module ApplicationHelper
 		end
 	end
 
+  def strftime(time)
+    if time.blank?
+      ""
+    else
+      time.strftime("%Y/%m/%d %H:%M")
+    end
+  end
+
 end
