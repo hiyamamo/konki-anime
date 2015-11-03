@@ -1,29 +1,49 @@
 <div class="col-md-8">
 <h3><%= @user.name %></h3>
 <h4>今期見るアニメリスト</h4>
-<% %i[sun mon tue wen thu fri sat].each do |sym| %>
-	<h3><%= get_jp_wday(sym) %></h3>
-	<table class="table">
-		<tbody>
-			<% watch_lists = @watch_lists[sym] %>
-			<% watch_lists.each do |w| %>
-				<tr>
-				<td><%= w.program.title %></td>
-				<td><%= w.detail.started_at.strftime("%Y/%m/%d %H:%M") %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
+<table class="table">
+<tbody>
+<% %i[sun mon tue wen thu fri sat other].each do |sym| %>
+  <% watch_lists = @watch_lists[sym] %>
+  <% unless watch_lists.blank? %>
+    <tr>
+      <td colspan="2"><h4><%= get_jp_wday(sym) %></h4></td>
+    </tr>
+    <% watch_lists.each do |w| %>
+      <tr>
+        <td><%= w.program.title %></td>
+        <td><%= w.detail.tv_station %></td>
+        <td><%= strftime(w.detail.started_at) %></td>
+      </tr>
+    <% end %>
+  <% end %>
 <% end %>
+</tbody>
+</table>
+<div>
+  <% if @watch_lists.blank? %>
+    <% new_or_edit = "編集する" %>
+  <% else %>
+    <% new_or_edit = "新規作成する" %>
+  <% end %>
+  <%= link_to new_or_edit, new_user_watch_list_path(:user_name => @user.name) %>
+</div>
+<div>
+  <%= link_to "シェアする", "#" %>
+</div>
 
 </div>
 <div class="col-md-4">
 <ul class="nav pills nav-stacked">
+  <h4>過去見たリスト</h4>
 	<% @seasons.each do |s| %>
-		<li><%= link_to s.value, user_watch_lists_path(:user_name => @user.name, :season => s.value) %></li>
-	<% end %>
-	<% unless @seasons.any?{|season| season.current == true } %>
-		<li><%= link_to '今期のウォッチリスト作成', new_user_watch_list_path(:user_name => @user.name) %></li>
+    <li>
+      <% value = s.value %>
+      <% if s.current %>
+        <% value = "#{value} (今期)" %>
+      <% end %>
+      <%= link_to value, user_watch_lists_path(:user_name => @user.name, :season => s.value) %>
+    </li>
 	<% end %>
 </ul>
 </div>

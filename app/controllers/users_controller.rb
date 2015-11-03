@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 		@user = User.find_by_name(params[:user_name])
 		season = Season.current
 		@watch_lists = {}
-		%i[sun mon tue wen thu fri sat].each do |wday|
+		%i[sun mon tue wen thu fri sat other].each do |wday|
 			@watch_lists[wday] = @user.watch_lists_at_wday(wday, season)
 		end
 		@seasons = []

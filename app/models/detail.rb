@@ -6,6 +6,10 @@ class Detail < ActiveRecord::Base
 
 	def wday
 		wdays = [:sun, :mon, :tue, :wen, :thu, :fri, :sat]
-		wdays[started_at.wday]
+    if started_at.blank?
+      :other
+    else
+      wdays[started_at.wday]
+    end
 	end
 end
