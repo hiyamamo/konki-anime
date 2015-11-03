@@ -27,9 +27,13 @@ class Program < ActiveRecord::Base
     programs.each do |program|
       p = season.programs.create(title: program["title"], url: program["url"])
       details = program["details"]
-      details.each do |detail|
-        started_at = Chronic.parse detail["started_at"]
-        p.details.create(tv_station: detail["station"], started_at: started_at)
+      if details.empty?
+        p.details.create(tv_station: "none", started_at: "")
+      else
+        details.each do |detail|
+          started_at = Chronic.parse detail["started_at"]
+          p.details.create(tv_station: detail["station"], started_at: started_at)
+        end
       end
       p.save!
     end
