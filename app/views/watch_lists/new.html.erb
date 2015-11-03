@@ -1,9 +1,8 @@
-<% @programs = programs(@season) %>
-
 <%= form_tag user_watch_lists_path do %>
 <table class="table">
 	<thead>
 		<tr>
+      <th><input type="checkbox" class="checkbox-h"></th>
 			<th>タイトル</th>
 			<th>詳細</th>
 		</tr>
@@ -13,11 +12,13 @@
 				<tr>
 					<td>
 						<input type="checkbox" class="wl-checkbox" id=<%= "p#{p.id}" %>>
+          </td>
+          <td>
 						<label for=<%= "p#{p.id}" %>><%= p.title %></label>
 					</td>
 					<td class="wl-select">
 						<% @options = build_options(p.details) %>
-						<%= select_tag 'selection[]', options_for_select(@options), :style => "background: gray;", :disabled => true %>
+            <%= select_tag 'selection[]', options_for_select(@options), :disabled => true %>
 					</td>
 				</tr>
 			<% end %>

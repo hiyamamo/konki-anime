@@ -4,13 +4,23 @@
 
 ready = ->
 	$(".wl-checkbox").click ->
-		select = $(this).parent().siblings(".wl-select").children("select")
+    toggleCheckBox($(this))
+
+	$(".checkbox-h").click ->
+		child = $(".wl-checkbox")
 		if $(this).is(":checked")
-			select.removeAttr("disabled")
-			select.css("background", "white")
+      child.prop("checked": true)
 		else
-			select.css("background", "gray")
-			select.attr("disabled", "disabled")
+      child.prop("checked": false)
+    toggleCheckBox(child)
+
+toggleCheckBox = (checkbox) ->
+  select = checkbox.parent().siblings(".wl-select").children("select")
+  if checkbox.is(":checked")
+    select.removeAttr("disabled")
+  else
+    select.attr("disabled", "disabled")
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
