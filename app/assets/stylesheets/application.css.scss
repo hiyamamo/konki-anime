@@ -50,73 +50,108 @@ body {
 
 }
 
+/* twitter-login */
 #twitter-login {
   position: absolute;
   top: 0px;
   right: 10px;
+  ul {
+    list-style: none;
+
+    li{
+      display: inline-block;
+      vertical-align: middle;
+      padding: 5px 10px 5px 5px;
+
+      a{
+        color: #808080;
+        text-decoration: none;
+      }
+
+      a:hover{
+        color: #1e90ff;
+      }
+
+      a:hover>span.profile {
+        display: block;
+        position: absolute;
+        top: 4.0em;
+        left: 1.0em;
+        width: 9em;
+        margin: 0.5em;
+        padding: 0.5em;
+        color: #000;
+        background: #696969;
+        font-size: 80%;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  span.profile {
+    display: none;
+  }
+
+  span.profile:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    margin-left: -9px;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 9px 9px 9px;
+    border-color: transparent transparent #696969 transparent;
+    z-index: 0;
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+  }
+
 }
 
-#twitter-login ul {
-  list-style: none;
-}
-
-#twitter-login ul li {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 5px 10px 5px 5px;
-}
-
-#twitter-login ul li a {
-  color: #000000;
-  text-decoration: none;
-}
-
-#twitter-login ul li a:hover {
-  color: #1e90ff;
-}
-
-#twitter-login span.profile {
-  display: none;
-}
-
-#twitter-login span.profile:before {
-  content: "";
-	position: absolute;
-	top: -8px;
-  left: 50%;
-	margin-left: -9px;
-	display: block;
-	width: 0px;
-	height: 0px;
-	border-style: solid;
-	border-width: 0 9px 9px 9px;
-	border-color: transparent transparent #696969 transparent;
-	z-index: 0;
-}
-
-
-#twitter-login ul li a:hover>span.profile {
-  display: block;
-  position: absolute;
-  top: 4.0em;
-  left: 1.0em;
-  width: 9em;
-  margin: 0.5em;
-  padding: 0.5em;
-  color: #000;
-  background: #696969;
-  font-size: 80%;
-  text-align: center;
-  color: #ffffff;
-  border-radius: 3px;
-}
-
-#twitter-login img {
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-}
 
 .container {
   width: 980px;
 }
+
+
+div#keyvisual {
+  margin-top: 5px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+}
+
+h3.now-season {
+  font-size: 20px;
+  text-align: center;
+  margin: 20px;
+}
+
+/* footer */
+
+.footer {
+  border-top: 1px solid #dcdcdc;
+  width: 980px;
+  padding: 10px;
+  margin: 10px auto;
+
+  #copyright {
+    padding-top: 5px;
+    text-align: center;
+    color: #808080;
+    font-size: 1em;
+  }
+}
+
