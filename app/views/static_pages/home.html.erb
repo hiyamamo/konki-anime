@@ -1,19 +1,17 @@
 <% @programs = programs(@season, "vote") %>
-<div class="row" id="season-list">
-	<div>
-		<h3><%= @season.now %></h3>
-	</div>
-</div>
 <div class="row">
-<table class="table" >
-	<tbody>
-	<% @programs.each do |p| %>
-		<tr>
-			<td><%= p.rank %>位</td>
-			<td><a href=<%= p.url %> ><%= p.title %></a></td>
-			<td><%= p.vote %>票</td>
-		</tr>
-	<% end %>
-	</tbody>
-</table>
+  <div>
+    <h3><%= @season.now %></h3>
+  </div>
+  <table>
+    <tbody>
+    <% @programs.each do |p| %>
+      <tr>
+        <td><%= p.rank %>位</td>
+        <td><a href=<%= p.url %> ><%= p.title %></a></td>
+        <td><%= p.vote %>票</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
