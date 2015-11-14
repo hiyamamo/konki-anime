@@ -1,7 +1,10 @@
 <% @programs = programs(@season, "vote") %>
 <div class="row">
+  <div id="keyvisual">
+    <%= image_tag "keyvisual.jpg" %>
+  </div>
   <div>
-    <h3><%= @season.now %></h3>
+    <h3 class="now-season"><%= @season.now %></h3>
   </div>
   <table>
     <tbody>
