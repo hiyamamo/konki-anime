@@ -17,4 +17,20 @@ class ProgramTest < ActiveSupport::TestCase
 		d.watch_lists.create(:user_id => 1)
 		assert_equal 4, p.vote
 	end
+
+  test "get earliest_date" do
+    p = Program.create
+
+    date = []
+    date.push(DateTime.new(2015, 1, 1, 12, 0, 0))
+    date.push(DateTime.new(2015, 1, 2, 12, 0, 0))
+    date.push(nil)
+    date.push(DateTime.new(2015, 1, 1, 13, 0, 0))
+
+    date.each do |d|
+      p.details.create(:started_at => d)
+    end
+
+    assert_equal date[0], p.earliest_date
+  end
 end

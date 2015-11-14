@@ -3,18 +3,46 @@
   <div id="keyvisual">
     <%= image_tag "keyvisual.jpg" %>
   </div>
-  <div>
-    <h3 class="now-season"><%= @season.now %></h3>
+    <div>
+    <h3 class="now-season"><%= @season.now %> 何見る？ランキング</h3>
   </div>
-  <table>
-    <tbody>
-    <% @programs.each do |p| %>
-      <tr>
-        <td><%= p.rank %>位</td>
-        <td><a href=<%= p.url %> ><%= p.title %></a></td>
-        <td><%= p.vote %>票</td>
-      </tr>
+  <div id="ranking">
+    <ul>
+      <% @programs.each do |p| %>
+      <li>
+        <div id="rank-content">
+          <% if p.rank == 1 %>
+            <div id="rank-img">
+              <%= image_tag "number1.png" %>
+            </div>
+          <% elsif p.rank == 2 %>
+            <div id="rank-img">
+              <%= image_tag "number2.png" %>
+            </div>
+          <% elsif p.rank == 3 %>
+            <div id="rank-img">
+              <%= image_tag "number3.png" %>
+            </div>
+          <% else %>
+            <div id="rank"><%= p.rank %>位</div>
+          <% end %>
+          <div id="program">
+            <a href=<%= p.url %> ><%= p.title %></a>
+            <div id="earliest-date">
+              <%= strftime(p.earliest_date) %>~
+            </div>
+          </div>
+          <div id="vote"><%= p.vote %>票</div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="link-wrapper" >
+    <% if singed_in? %>
+      <%= link_to "マイページで投票する",  user_path(:name => current_user.name), { :id => "link-to-profile" } %>
+    <% else %>
+      <%= link_to "Twitterログインして投票" , "/auth/twitter", { :id => "link-to-profile" } %>
     <% end %>
-    </tbody>
-  </table>
+  </div>
 </div>

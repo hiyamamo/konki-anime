@@ -60,4 +60,8 @@ class Program < ActiveRecord::Base
 		vote
 	end
 
+  def earliest_date
+    self.details.order('started_at IS NULL, started_at ASC').first.started_at
+  end
+
 end
