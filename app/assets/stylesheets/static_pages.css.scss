@@ -37,11 +37,11 @@ h3.now-season:before {
     border-top: 1px solid #ff8c00;
     padding: 10px;
 
-    #rank-content{
+    .rank-content{
       overflow: auto;
     }
 
-    #rank {
+    .rank {
       float: left;
       padding-top: 20px;
       padding-left: 5px;
@@ -49,7 +49,7 @@ h3.now-season:before {
       letter-spacing: 0;
       width: 70px;
     }
-    #rank-img {
+    .rank-img {
       img {
         max-width: 20px;
         height: auto;
@@ -60,7 +60,7 @@ h3.now-season:before {
       width: 70px;
     }
 
-    #program {
+    .program {
       float:left;
       margin-top: 10px;
       margin-left: 16px;
@@ -79,7 +79,7 @@ h3.now-season:before {
         font-size: 13px;
       }
     }
-    #vote {
+    .vote {
       font-size: 18px;
       margin-top: 20px;
       margin-left: 10px;

@@ -11,29 +11,29 @@
     <ul>
       <% @programs.each do |p| %>
       <li>
-        <div id="rank-content">
+        <div class="rank-content">
           <% if p.rank == 1 %>
-            <div id="rank-img">
+            <div class="rank-img">
               <%= image_tag "number1.png" %>
             </div>
           <% elsif p.rank == 2 %>
-            <div id="rank-img">
+            <div class="rank-img">
               <%= image_tag "number2.png" %>
             </div>
           <% elsif p.rank == 3 %>
-            <div id="rank-img">
+            <div class="rank-img">
               <%= image_tag "number3.png" %>
             </div>
           <% else %>
-            <div id="rank"><%= p.rank %>位</div>
+            <div class="rank"><%= p.rank %>位</div>
           <% end %>
-          <div id="program">
+          <div class="program">
             <a href=<%= p.url %> ><%= p.title %></a>
-            <div id="earliest-date">
+            <div class="earliest-date">
               <%= strftime(p.earliest_date) %>~
             </div>
           </div>
-          <div id="vote"><%= p.vote %>票</div>
+          <div class="vote"><%= p.vote %>票</div>
         </div>
       </li>
       <% end %>
