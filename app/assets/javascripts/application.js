@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require_tree .
 
-function toggleWatchBtn(e){
+function onPushWatchBtn(e){
   var isWatching = $(e).hasClass("watching");
 
   var select = $(e).prev();
@@ -29,25 +29,36 @@ function toggleWatchBtn(e){
   var url = "/users/" + userName + "/watch_lists";
 
   if(isWatching){
+
     $.ajax({
       type: "DELETE",
       url: url + "/" + detailId,
+      success: function(){
+        onSuccessAjax(e);
+        select.attr("disabled", false);
+      },
     });
-    select.attr("disabled", false);
+
   }else{
-    select.attr("disabled", "disabled");
+
     $.ajax({
       type: "POST",
       url: url,
       data: { detail_id: detailId },
+      success: function(){
+        onSuccessAjax(e);
+        select.attr("disabled", "disabled");
+      },
     });
-
   }
 
-  $("span", e).toggle();
+}
 
+function onSuccessAjax(e){
+  $("span", e).toggle();
   $(e).toggleClass("watching");
 }
+
 
 function ready() {
   $(".watch-button").hover(
