@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :watch_lists, dependent: :destroy
 	has_many :details, :through => :watch_lists
+  has_many :programs, :through => :details
 	validates :name, :presence => true
 	validates :access_token, :presence => true
 	validates :access_token_secret, :presence => true

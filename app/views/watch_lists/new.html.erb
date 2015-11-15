@@ -1,28 +1,19 @@
-<%= form_tag user_watch_lists_path do %>
-<table class="table">
-	<thead>
-		<tr>
-      <th><input type="checkbox" class="checkbox-h"></th>
-			<th>タイトル</th>
-			<th>詳細</th>
-		</tr>
-	</thead>
-	<tbody>
-			<% @programs.each do |p, idx| %>
-				<tr>
-					<td>
-						<input type="checkbox" class="wl-checkbox" id=<%= "p#{p.id}" %>>
-          </td>
-          <td>
-						<label for=<%= "p#{p.id}" %>><%= p.title %></label>
-					</td>
-					<td class="wl-select">
-						<% @options = build_options(p.details) %>
-            <%= select_tag 'selection[]', options_for_select(@options), :disabled => true %>
-					</td>
-				</tr>
-			<% end %>
-	</tbody>
-</table>
-<%= submit_tag "決定", :class => "btn btn-default" %>
-<% end %>
+<%= stylesheet_link_tag "watch_lists" %>
+<div id="programs-wrapper">
+    <% @programs.each do |p, idx| %>
+      <div class="program">
+        <div class="title">
+          <h3><%= p.title %></h3>
+          <p class="vote">p.vote</p>
+        </div>
+        <div class="details">
+          <% @options = build_options(p.details) %>
+          <%= select_tag 'selected', options_for_select(@options), { :class=> "detail-select" } %>
+          <div class="watch-button" onClick="toggleWatchBtn(this)"data=<%= @user.name %>>
+            <span class="no-watched-text">投票する</span>
+            <span class="watched-text" style="display:none"></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>

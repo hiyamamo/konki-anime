@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707074844) do
+ActiveRecord::Schema.define(version: 20151115070347) do
 
   create_table "details", force: true do |t|
     t.string   "tv_station"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150707074844) do
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote",       default: 0
   end
 
   add_index "programs", ["season_id"], name: "index_programs_on_season_id"

@@ -52,13 +52,6 @@ class Program < ActiveRecord::Base
     program.save
   end
 
-	def vote
-		vote = 0
-		self.details.each do |detail|
-			vote += detail.watch_lists.count
-		end
-		vote
-	end
 
   def earliest_date
     self.details.order('started_at IS NULL, started_at ASC').first.started_at

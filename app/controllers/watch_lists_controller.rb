@@ -12,34 +12,38 @@ class WatchListsController < ApplicationController
 	def new
 		@season = Season.current
     @programs = Program.where(:season => @season)
+    @user = User.find_by_name(params[:user_name])
 	end
 
 	def create
 		user = User.find_by_name(params[:user_name])
-		detail_ids = params[:selection]
+		detail_id = params[:detail_id]
+    program = Detail.find_by_id(detail_id).program
 
-    watch_lists = user.watch_lists(Season.current)
-
-    unless detail_ids.blank?
-      # 新規のみ追加
-      detail_ids.each do |detail_id|
-        if user.watch_lists.where(:detail_id => detail_id).empty?
-          user.watch_lists.create(:detail_id => detail_id)
-        end
-      end
-      # 既存のIDから無くなったものを削除
-      detail_ids = detail_ids.map do |d|
-        d.to_i
-      end
-      watch_lists.each do |watch_list|
-        unless detail_ids.include? watch_list.detail_id
-          watch_list.destroy
-        end
-      end
-    else
-      watch_lists.destroy_all
+    unless program.nil? || user.programs.include?(program)
+      user.watch_lists.create(:detail_id => detail_id)
+      program.vote = program.vote + 1
+      program.save
     end
-		redirect_to user_path(:name => user.name)
+    head :ok
 	end
+
+  def destroy
+    user = User.find_by_name(params[:user_name])
+    detail_id = params[:detail_id]
+    if wl = user.watch_lists.find_by_id(detail_id)
+      wl.destroy
+    end
+
+    program = Detail.find_by_id(detail_id).program
+
+    program.vote -= 1
+
+    if program.vote < 0
+      program.vote = 0
+    end
+    program.save
+    head :ok
+  end
 
 end

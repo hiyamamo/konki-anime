@@ -1,3 +1,68 @@
 // Place all the styles related to the watch_lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.program {
+  margin-top: 16px;
+  overflow: hidden;
+  border-top: 1px solid #dcdcdc;
+  float: left;
+}
+
+.title {
+  padding-top: 30px;
+  padding-left: 10px;
+  float: left;
+  width: 400px;
+  h3 {
+    font-size: 15px;
+    margin-bottom: .45em;
+    line-height: 1.3;
+  }
+  p {
+    font-size: 0.7em;
+  }
+}
+
+.details {
+  float: left;
+  width: 300px;
+  margin: 20px;
+}
+
+.detail-select {
+  margin-bottom: 20px;
+}
+
+.watch-button {
+  display:block;
+  width: 100px;
+  padding: 5px 0;
+  background-color: #ffffff;
+  border: 1px solid #808080;
+  color: #000000;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 2px;
+  cursor: pointer;
+  span {
+    vertical-align: baseline;
+  }
+}
+
+.watch-button:hover {
+  background-color: #dcdcdc;
+}
+
+.watching:hover{
+  background-color: #ff6347;
+}
+
+.watching {
+  background-color: #00bfff;
+}
+
+.watched-text {
+  color: #ffffff;
+}
+

@@ -15,3 +15,50 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+function toggleWatchBtn(e){
+  var isWatching = $(e).hasClass("watching");
+
+  var select = $(e).prev();
+
+  var detailId = select.val();
+
+  var userName = $(e).attr("data");
+
+
+  var url = "/users/" + userName + "/watch_lists";
+
+  if(isWatching){
+    $.ajax({
+      type: "DELETE",
+      url: url + "/" + detailId,
+    });
+    select.attr("disabled", false);
+  }else{
+    select.attr("disabled", "disabled");
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: { detail_id: detailId },
+    });
+
+  }
+
+  $("span", e).toggle();
+
+  $(e).toggleClass("watching");
+}
+
+function ready() {
+  $(".watch-button").hover(
+      function() {
+        $(".watched-text", this).html("解除");
+      },
+      function() {
+        $(".watched-text", this).html("投票済み");
+      });
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

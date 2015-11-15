@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   get 'users/:user_name' => 'users#show'
 
 	resources :users, :param => :name, :only => [:show] do
-		resources :watch_lists, shallow: true, :except => [:show]
+		resources :watch_lists, shallow: true, :except => [:show, :destroy]
 	end
+
+  delete '/users/:user_name/watch_lists/:detail_id' => 'watch_lists#destroy'
 
 
 
