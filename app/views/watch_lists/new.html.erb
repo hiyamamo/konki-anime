@@ -1,18 +1,31 @@
 <%= stylesheet_link_tag "watch_lists" %>
+<ol class="breadcrumb">
+  <li><%= link_to "トップ", root_path %></li>
+  <li><%= link_to "マイページ", user_path(:name => @user.name ) %></li>
+  <li>マイリスト作成</li>
+</ol>
 <div id="programs-wrapper">
     <% @programs.each do |p, idx| %>
       <div class="program">
         <div class="title">
           <h3><%= p.title %></h3>
-          <p class="vote">p.vote</p>
+          <p class="vote"><%= p.vote %></p>
         </div>
         <div class="details">
           <% @options = build_options(p.details) %>
-          <%= select_tag 'selected', options_for_select(@options), { :class=> "detail-select" } %>
-          <div class="watch-button" onClick="onPushWatchBtn(this)"data=<%= @user.name %>>
-            <span class="no-watched-text">投票する</span>
-            <span class="watched-text" style="display:none"></span>
-          </div>
+          <% if @user.programs.include? p %>
+            <%= select_tag 'selected', options_for_select(@options, { :selected => @user.detail_in(p.details).id }), { :class=> "detail-select", :disabled => true } %>
+            <div class="watch-button watching" onClick="onPushWatchBtn(this)"data=<%= @user.name %>>
+              <span class="no-watched-text" style="display:none">投票する</span>
+              <span class="watched-text" >投票中</span>
+            </div>
+          <% else %>
+            <%= select_tag 'selected', options_for_select(@options), { :class=> "detail-select" } %>
+            <div class="watch-button" onClick="onPushWatchBtn(this)"data=<%= @user.name %>>
+              <span class="no-watched-text" >投票する</span>
+              <span class="watched-text" style="display:none">投票中</span>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

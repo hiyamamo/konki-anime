@@ -31,7 +31,7 @@ class WatchListsController < ApplicationController
   def destroy
     user = User.find_by_name(params[:user_name])
     detail_id = params[:detail_id]
-    if wl = user.watch_lists.find_by_id(detail_id)
+    if wl = user.watch_lists.find_by_detail_id(detail_id)
       wl.destroy
     end
 

@@ -23,6 +23,7 @@ class WatchList < ActiveRecord::Base
 		end
 	end
 
+
 	private
 	def self.search_detail(details, p_id)
 		dt = details.index  do |d|

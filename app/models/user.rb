@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
 		@watch_lists = super.where(:detail => details)
 	end
 
+  def detail_in(details)
+    details.each do |d|
+      if self.details.exists? d
+        return d
+      end
+    end
+  end
+
 	def User.new_rememnber_token
 		SecureRandom.urlsafe_base64
 	end

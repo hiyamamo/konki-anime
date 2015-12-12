@@ -69,6 +69,25 @@ function ready() {
         $(".watched-text", this).html("投票済み");
       });
 
+
+    var topBtn = $('#scroll-to-top');
+    topBtn.hide();
+
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+          topBtn.fadeIn();
+      } else {
+          topBtn.fadeOut();
+      }
+    });
+
+    topBtn.click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+        return false;
+    });
+
 };
 
 $(document).ready(ready);

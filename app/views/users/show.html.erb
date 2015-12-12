@@ -1,50 +1,65 @@
-<div class="col-md-8">
-<h3><%= @user.name %></h3>
-<h4>今期見るアニメリスト</h4>
-<table class="table">
-<tbody>
-<% %i[sun mon tue wen thu fri sat other].each do |sym| %>
-  <% watch_lists = @watch_lists[sym] %>
-  <% unless watch_lists.blank? %>
-    <tr>
-      <td colspan="2"><h4><%= get_jp_wday(sym) %></h4></td>
-    </tr>
-    <% watch_lists.each do |w| %>
-      <tr>
-        <td><%= w.program.title %></td>
-        <td><%= w.detail.tv_station %></td>
-        <td><%= strftime(w.detail.started_at) %></td>
-      </tr>
-    <% end %>
-  <% end %>
-<% end %>
-</tbody>
-</table>
-<div>
-  <% if @watch_lists.blank? %>
-    <% new_or_edit = "編集する" %>
-  <% else %>
-    <% new_or_edit = "新規作成する" %>
-  <% end %>
-  <%= link_to new_or_edit, new_user_watch_list_path(:user_name => @user.name) %>
-</div>
-<div>
-  <%= link_to "シェアする", "#" %>
+<%= stylesheet_link_tag 'users' %>
+<ol class="breadcrumb">
+  <li><%= link_to "トップ", root_path %></li>
+  <li>マイページ</li>
+</ol>
+<div id="user-profile">
+  <%= image_tag current_user.img_url %>
+  <span><%= @user.name %></span>
 </div>
 
-</div>
-<div class="col-md-4">
-<ul class="nav pills nav-stacked">
-  <h4>過去見たリスト</h4>
-	<% @seasons.each do |s| %>
-    <li>
-      <% value = s.value %>
-      <% if s.current %>
-        <% value = "#{value} (今期)" %>
+<div class="col-md-8">
+
+  <% if @user.watch_lists.blank? %>
+    <div id="new-or-edit">
+      <% new_or_edit = "今期見るアニメリストを作成する" %>
+      <%= link_to new_or_edit, new_user_watch_list_path(:user_name => @user.name) %>
+    </div>
+  <% else %>
+    <div id="new-or-edit">
+      <% new_or_edit = "編集する" %>
+      <%= link_to new_or_edit, new_user_watch_list_path(:user_name => @user.name) %>
+    </div>
+    <div id="share">
+      <%= link_to "シェアする", "#" %>
+    </div>
+    <div id="watch-list">
+      <h4>今期見るアニメリスト</h4>
+      <table class="table">
+      <tbody>
+      <% %i[sun mon tue wen thu fri sat other].each do |sym| %>
+        <% watch_lists = @watch_lists[sym] %>
+        <% unless watch_lists.blank? %>
+          <tr>
+            <td colspan="2"><h4><%= get_jp_wday(sym) %></h4></td>
+          </tr>
+          <% watch_lists.each do |w| %>
+            <tr>
+              <td><%= w.program.title %></td>
+              <td><%= w.detail.tv_station %></td>
+              <td><%= strftime(w.detail.started_at) %></td>
+            </tr>
+          <% end %>
+        <% end %>
       <% end %>
-      <%= link_to value, user_watch_lists_path(:user_name => @user.name, :season => s.value) %>
-    </li>
-	<% end %>
-</ul>
+      </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-md-4" id="past-list">
+  <ul class="nav pills nav-stacked">
+    <h4>過去見たリスト</h4>
+    <% @seasons.each do |s| %>
+      <li>
+        <% value = s.value %>
+        <% if s.current %>
+          <% value = "#{value} (今期)" %>
+        <% end %>
+        <%= link_to value, user_watch_lists_path(:user_name => @user.name, :season => s.value) %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 

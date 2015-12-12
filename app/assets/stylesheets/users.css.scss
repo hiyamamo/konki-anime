@@ -1,3 +1,42 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "application";
+
+#user-profile {
+  overflow: hidden;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 10px 0;
+  img {
+    width: 70px;
+    height: auto;
+    float:left;
+  }
+  span {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px;
+
+  }
+}
+:q
+:q
+:q
+
+#new-or-edit {
+  @include link-button(280px, #ffffff, #000000);
+  border-color: #000000;
+  border-radius: 0px;
+  margin: 50px auto 0 auto;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+  a {
+    font-size: 25px;
+    color: #000000;
+    text-decoration: none;
+  }
+}
+
